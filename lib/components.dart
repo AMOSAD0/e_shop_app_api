@@ -1,8 +1,10 @@
+import 'package:e_shop_app/constans.dart';
 import 'package:flutter/material.dart';
 
-Widget buildTextField({@required String ?label}){
+Widget BuildTextField({@required String ?label,@required TextEditingController? controller,@required String?Function(String?) ?validator,
+}){
   return Container(
-    height: 64.0,
+    height: 79.0,
     width: double.infinity,
     decoration: BoxDecoration(
       color: Colors.white,
@@ -19,6 +21,8 @@ Widget buildTextField({@required String ?label}){
       padding: const EdgeInsets.all(1.0),
       child: TextFormField(
 
+        controller: controller,
+        validator: validator,
         decoration: InputDecoration(
           label: Text(label!,style: TextStyle(fontSize: 14.0,)),
           enabledBorder: InputBorder.none,
@@ -29,19 +33,24 @@ Widget buildTextField({@required String ?label}){
   );
 }
 
-Widget buildButton({@required String ? label}){
-  return Container(
-    height: 48.0,
-    width: double.infinity,
-    decoration: BoxDecoration(
-      color: Colors.cyan,
-      borderRadius: BorderRadius.circular(25.0),
+Widget BuildButton({@required String ? label,
+  @required Function() ?function,
+}){
+  return InkWell(
+  onTap: function!,
+    child: Container(
+      height: 48.0,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color:primaryColor,
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      child: Center(child: Text(label!)),
     ),
-    child: Center(child: Text(label!)),
   );
 }
 
-Widget buildIconButton({@required String ? img}){
+Widget BuildIconButton({@required String ? img}){
   return Container(
     height: 64.0,
     width: 92.0,
