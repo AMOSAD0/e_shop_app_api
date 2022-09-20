@@ -68,3 +68,110 @@ Widget BuildIconButton({@required String ? img}){
     child: Image(image: AssetImage(img!)),
   );
 }
+
+Widget BuildBlocItem({
+  @required String ? label,
+  @required String ? desc,
+  @required Function ()?function,
+  context
+}){
+  return Container(
+    height: 357.0,
+    width: double.infinity,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(label!,
+              style:Theme.of(context).textTheme.bodyLarge,
+            ),
+            TextButton(
+                child: Text('View all',
+                  style: Theme.of(context).textTheme.button,
+                ),
+                 onPressed:function!,
+            ),
+          ],
+        ),
+        Text(desc!,
+        style: Theme.of(context).textTheme.displaySmall,
+        ),
+        SizedBox(
+          height: 20.0,
+        ),
+        BuildProudctCard(),
+      ],
+    ),
+  );
+}
+
+Widget BuildProudctCard(){
+  return Container(
+    height: 265.0,
+    width: double.infinity,
+    child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) => Container(
+            width: 150,
+            height: 265,
+            child:Stack(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 184.0,
+                      width: 148.0,
+                      color: Colors.cyan,
+                      child: Text('image'),
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.star,
+                          color: Colors.yellow,
+                          size: 20.0,
+                        ),
+                      ],
+                    ),
+                    Text('type',
+                      style:Theme.of(context).textTheme.displaySmall,
+                    ),
+                    Text('name',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text('15\$',
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontSize: 14.0,
+                      ),
+                    )
+                  ],
+                ),
+                Positioned(
+                    top: 164.0,
+                    right: 0.0,
+                    child:Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.6),
+                            spreadRadius: 3,
+                            blurRadius: 18,
+                          )
+                        ],
+                      ),
+                      child: CircleAvatar(
+                        child: ImageIcon(AssetImage('lib/images/favorites.png'),color: Colors.black),
+                        backgroundColor: Colors.white,
+                        radius: 18.0,
+                      ),
+                    )
+                ),
+              ],
+            ) ,
+        ),
+        separatorBuilder: (context, index) => SizedBox(width: 18.0), itemCount:5),
+  );
+}
